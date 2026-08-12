@@ -2,7 +2,7 @@
     <!-- Container principal da tela, usando classes do Bootstrap -->
     <div class="container mt-4">
         <!-- Título da página -->
-        <h1 class="mb-4">Cadastro de Produtos</h1>
+        <h1 class="mb-4">Cadastro de Aluno</h1>
 
         <!-- Formulário de cadastro -->
         <div class="input-group mb-4">
@@ -18,26 +18,26 @@
             <button @click="salvar" class="btn btn-primary">Cadastrar</button>
         </div>
 
-        <h2>Lista de Produtos</h2>
+        <h2>Lista de Aluno</h2>
 
-        <!-- Lista de produtos cadastradas -->
+        <!-- Lista de aluno cadastradas -->
         <ul class="list-group">
             <!--
-        v-for percorre o array "produtos"
-        Para cada produtos, cria um item de lista
+        v-for percorre o array "aluno"
+        Para cada alunos, cria um item de lista
         :key ajuda o Vue a identificar cada item de forma única
       -->
             <li
-                v-for="produtos in produtos"
-                :key="Produtos.id"
+                v-for="aluno in aluno"
+                :key="Aluno.id"
                 class="list-group-item d-flex justify-content-between align-items-center"
             >
-                <!-- Mostra o nome da produto -->
-                {{ produtos.nome }}
+                <!-- Mostra o nome da aluno -->
+                {{ aluno.nome }}
 
-                <!-- Ao clicar, envia o ID da produto para a função excluir() -->
+                <!-- Ao clicar, envia o ID da aluno para a função excluir() -->
                 <button
-                    @click="excluir(produtos.id)"
+                    @click="excluir(aluno.id)"
                     class="btn btn-sm btn-danger"
                 >
                     Excluir
@@ -55,7 +55,7 @@
     data() {
         return {
             nome: "", // Guarda o nome digitado no formulário
-            produtos: [], // Guarda a lista de produtos vindas do banco
+            alunos: [], // Guarda a lista de alunos vindas do banco
         };
     },
 
@@ -65,35 +65,35 @@
     },
 
     methods: {
-        // Busca a lista de produtos cadastradas no Laravel
+        // Busca a lista de alunos cadastradas no Laravel
         async listar() {
             // Faz uma requisição GET para a API do Laravel
             const resposta = await axios.get(
-                "http://localhost:8000/api/produtos",
+                "http://localhost:8000/api/alunos",
             );
 
-            // Guarda os dados recebidos na variável "produtos"
-            this.produtos = resposta.data;
+            // Guarda os dados recebidos na variável "aluno"
+            this.aluno = resposta.data;
         },
 
         // Envia um novo cadastro para o Laravel
         async salvar() {
             // Envia o nome digitado para a API do Laravel
-            await axios.post("http://localhost:8000/api/produtos", {
+            await axios.post("http://localhost:8000/api/alunos", {
                 nome: this.nome,
             });
 
             // Limpa o campo após salvar
             this.nome = "";
 
-            // Atualiza a lista de produtos
+            // Atualiza a lista aluno
             this.listar();
         },
 
-        // Remove uma produto pelo ID
+        // Remove uma aluno pelo ID
         async excluir(id) {
             // Envia o ID para a API excluir o registro
-            await axios.delete(`http://localhost:8000/api/produtos/${id}`);
+            await axios.delete(`http://localhost:8000/api/alunos/${id}`);
 
             // Atualiza a lista depois da exclusão
             this.listar();

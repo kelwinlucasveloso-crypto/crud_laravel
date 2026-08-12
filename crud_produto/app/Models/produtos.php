@@ -13,6 +13,7 @@ class produtos extends Model
     // Define quais campos podem receber informações
     // através de cadastro ou atualização (mass assignment)
     protected $fillable = [
+        'id',//Campo que será salvo no banco de dados
         'nome', // Campo que será salvo no banco de dados
         'preco', // Campo que será salvo no banco de dados
         'quantidade'// Campo que será salvo no banco de dados
